@@ -62,6 +62,7 @@ public final class Downloader {
             return;
         }
         Herald.info("Collected " + queueFile.size() + " links.");
+
         Herald.info("Start downloading in threads");
         int cores = Runtime.getRuntime().availableProcessors();
         Herald.info("Your PC has " + cores + " CPU cores.");
