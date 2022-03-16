@@ -3,15 +3,11 @@ package ru.dkx86.boorudownloader;
 import ru.dkx86.boorudownloader.dl.Downloader;
 import ru.dkx86.boorudownloader.dl.QueueFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Main {
 
 
     public static void main(String[] args) {
-        if (args.length == 0 || args[0].equals("--help") || args[0].equals("-h")) {
+        if (args.length == 0 || args[0].equals("--help")) {
             printHelp();
             return;
         }
@@ -21,21 +17,30 @@ public class Main {
             return;
         }
 
-        String source = null;
-        List<String> tags = null;
-        if (args[0].equals("-s"))
-            source = args[1];
 
-        if (args[2].equals("-t"))
-            tags = new ArrayList<>(Arrays.asList(args).subList(3, args.length));
+        String source = null;
+        String tags = null;
+        String ratingStr = null;
+        for (var i = 0; i < args.length; i++) {
+            if (args[i].equals("--src"))
+                source = args[i + 1];
+
+            if (args[i].equals("--tags"))
+                tags = args[i + 1];
+
+            if (args[i].equals("--rating"))
+                ratingStr = args[i + 1];
+        }
+
 
         if (source == null || tags == null) {
             printHelp();
             return;
         }
+        final RatingFilter ratingFilter = new RatingFilter(ratingStr);
         var queueFile = new QueueFile();
         var src = AvailableSites.valueOf(source);
-        new Downloader(src, tags, queueFile).start();
+        new Downloader(src, tags, queueFile, ratingFilter).start();
 
     }
 
@@ -51,7 +56,9 @@ public class Main {
         System.out.println("PARAMS:");
 
         System.out.println("--list - list supported websites.");
-        System.out.println("-s <SITE_NAME> -t tag1 tag2 tagN - download all images by tags. Use <SITE_NAME> from the '--list' command output.");
-        System.out.println("--help -h - pring this help.");
+        System.out.println("--src <SITE_NAME> - source site name. Use <SITE_NAME> from the '--list' command output.");
+        System.out.println("--tags \"tag1 tag2 tagN\" - tag list to download");
+        System.out.println("--rating s|q|e - rating: safe | questionable | explicit. Will download all if not present.");
+        System.out.println("--help - print this help.");
     }
 }

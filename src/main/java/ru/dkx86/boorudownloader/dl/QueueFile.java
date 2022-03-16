@@ -60,6 +60,10 @@ public class QueueFile {
                 .replaceAll(":", "_");
     }
 
+    public int size() {
+        return links.size();
+    }
+
     public static class Entry {
         private final URL url;
         private final Path path;

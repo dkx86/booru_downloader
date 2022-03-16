@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import ru.dkx86.boorudownloader.AvailableSites;
 import ru.dkx86.boorudownloader.Herald;
+import ru.dkx86.boorudownloader.RatingFilter;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -25,14 +26,16 @@ public final class Downloader {
     private static final int REPEAT_TIMEOUT = 20000; // 20 sec
 
     private final AvailableSites site;
-    private final List<String> tags;
+    private final String tags;
     private final QueueFile queueFile;
+    private final RatingFilter ratingFilter;
     private final Gson gson;
 
-    public Downloader(AvailableSites site, List<String> tags, QueueFile queueFile) {
+    public Downloader(AvailableSites site, String tags, QueueFile queueFile, RatingFilter ratingFilter) {
         this.site = site;
         this.tags = tags;
         this.queueFile = queueFile;
+        this.ratingFilter = ratingFilter;
         this.gson = new Gson();
     }
 
@@ -42,15 +45,10 @@ public final class Downloader {
         url.append("page=").append(page);
         url.append("&limit=").append(LIMIT);
 
-        if (tags == null || tags.isEmpty()) return url.toString();
-
-        String tagstr = "";
-        for (String tag : tags) {
-            //noinspection StringConcatenationInLoop
-            tagstr += tag + ' ';
+        if (tags != null && !tags.isEmpty()) {
+            url.append("&tags=").append(URLEncoder.encode(tags.trim(), StandardCharsets.UTF_8));
         }
 
-        url.append("&tags=").append(URLEncoder.encode(tagstr.trim(), StandardCharsets.UTF_8));
         return url.toString().trim();
     }
 
@@ -63,7 +61,7 @@ public final class Downloader {
             Herald.err("Cannot collect links", e);
             return;
         }
-        Herald.info("Collected links.");
+        Herald.info("Collected " + queueFile.size() + " links.");
         Herald.info("Start downloading in threads");
         int cores = Runtime.getRuntime().availableProcessors();
         Herald.info("Your PC has " + cores + " CPU cores.");
@@ -99,11 +97,10 @@ public final class Downloader {
 
             int counter = 0;
             for (PageItem item : list) {
-                if (!isValidRating(item.getRating())) {
-                    continue;
+                if (ratingFilter.isValid(item.getRating())) {
+                    queueFile.addLink(item.getFileUrl());
+                    counter++;
                 }
-                queueFile.addLink(item.getFileUrl());
-                counter++;
             }
 
             Herald.info(counter + " link added to queue.");
@@ -111,19 +108,6 @@ public final class Downloader {
         }
     }
 
-
-    private boolean isValidRating(Rating rating) {
-        /*switch (rating) {
-            case SAFE:
-                return config.isSafe();
-            case QUESTIONABLE:
-                return config.isQuestenable();
-            case EXPLICIT:
-                return config.isExplicit();
-        }*/
-        //TODO
-        return true;
-    }
 
     private List<PageItem> getPage(int pageNumber) {
         List<PageItem> items = new ArrayList<>();

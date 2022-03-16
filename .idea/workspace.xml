@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cde69b3-b3b9-48f2-a542-c6d2ff8c3667" name="Changes" comment="Collect links and downloading unfiltered files">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/AvailableSites.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/Herald.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/Downloader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/ImageThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/PageItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/QueueFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/Rating.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="1cde69b3-b3b9-48f2-a542-c6d2ff8c3667" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/RatingFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/Downloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/QueueFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/dl/QueueFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +58,7 @@
     <configuration name="Main get" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.dkx86.boorudownloader.Main" />
       <module name="booru_downloader.main" />
-      <option name="PROGRAM_PARAMETERS" value="-s KONACHAN -t headphones" />
+      <option name="PROGRAM_PARAMETERS" value="--src KONACHAN --tags &quot;shirai_kuroko&quot; " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ru.dkx86.boorudownloader.*" />
@@ -112,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647197222756</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Collect links and downloading unfiltered files">
+      <created>1647443151647</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647443151647</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,9 +127,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="Empty" />
+    <MESSAGE value="Collect links and downloading unfiltered files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Collect links and downloading unfiltered files" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/dkx86/boorudownloader/Main.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
